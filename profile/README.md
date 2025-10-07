@@ -20,7 +20,10 @@
 ![React-Financial-Charts](https://img.shields.io/badge/Financial%20Charts-2.0.2-0A66C2?logo=chart.js&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
+---
 
+⚠️ **Note:** All repositories in this organization are **private**.  
+If you don’t see any projects, that’s expected — access is limited to collaborators only.
 
 
 🚀 **Want to contribute?**
