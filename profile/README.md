@@ -13,7 +13,7 @@
         <img src="https://img.shields.io/badge/MUI-6.5.0-007FFF?logo=mui&logoColor=white"/>
         <img src="https://img.shields.io/badge/Redux-4.1.2-E3FF00?logo=redux&logoColor=white"/>
         <img src="https://img.shields.io/badge/D3.js-4.11.0-F9A03C?logo=d3.js&logoColor=white"/>
-        <img src="https://img.shields.io/badge/React-Financial-Charts-2.0.2-0A66C2?logo=chart.js&logoColor=white"/>
+        <img src="https://img.shields.io/badge/React%20Financial%20Charts-2.0.2-0A66C2?logo=chart.js&logoColor=white"/>
         <img src="https://img.shields.io/badge/License-MIT-C0C0C0"/>
       </p>
       <!-- React Financial Charts - Exclusive version (Frontend) -->
