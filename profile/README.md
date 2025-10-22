@@ -42,6 +42,7 @@
         <img src="https://img.shields.io/badge/Mocha-3.5.3-D5D5FD?logo=mocha&logoColor=white"/>
         <img src="https://img.shields.io/badge/Dotenv-5.0.1-FDE2C6"/>
         <img src="https://img.shields.io/badge/CORS-2.8.4-FDC6E2"/>
+        <img src="https://img.shields.io/badge/Winston-3.18.3-D9F2FF"/>
         <img src="https://img.shields.io/badge/Lodash-4.17.5-D5FDD5"/>
         <img src="https://img.shields.io/badge/License-MIT-C0C0C0"/>
       </p>
