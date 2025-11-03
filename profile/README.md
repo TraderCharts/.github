@@ -14,6 +14,9 @@
         <img src="https://img.shields.io/badge/Redux-4.1.2-E3FF00?logo=redux&logoColor=white"/>
         <img src="https://img.shields.io/badge/D3.js-4.11.0-F9A03C?logo=d3.js&logoColor=white"/>
         <img src="https://img.shields.io/badge/React%20Financial%20Charts-2.0.2-0A66C2?logo=chart.js&logoColor=white"/>
+        <img src="https://img.shields.io/badge/Framer%20Motion-12.23.24-2874A6?logo=framer&logoColor=white"/>
+        <img src="https://img.shields.io/badge/ESLint-8.56.0-61DAFB?logo=eslint&logoColor=black"/>
+        <img src="https://img.shields.io/badge/Prettier-3.6.2-FDE2C6?logo=prettier&logoColor=black"/>
         <img src="https://img.shields.io/badge/License-MIT-C0C0C0"/>
       </p>
       <!-- React Financial Charts - Exclusive version (Frontend) -->
@@ -39,11 +42,14 @@
         <img src="https://img.shields.io/badge/MariaDB-%3E=_5.5-5B8CD6?logo=mariadb&logoColor=white"/>
         <img src="https://img.shields.io/badge/SQLite-%3E=_3-5B8CD6?logo=sqlite&logoColor=white"/>
         <img src="https://img.shields.io/badge/MSSQL-%3E=_2012-5B8CD6?logo=microsoft-sql-server&logoColor=white"/>
-        <img src="https://img.shields.io/badge/Mocha-3.5.3-D5D5FD?logo=mocha&logoColor=white"/>
-        <img src="https://img.shields.io/badge/Dotenv-5.0.1-FDE2C6"/>
-        <img src="https://img.shields.io/badge/CORS-2.8.4-FDC6E2"/>
-        <img src="https://img.shields.io/badge/Winston-3.18.3-D9F2FF"/>
-        <img src="https://img.shields.io/badge/Lodash-4.17.5-D5FDD5"/>
+        <img src="https://img.shields.io/badge/Mocha-3.5.3-A1D0FF?logo=mocha&logoColor=white"/>
+        <img src="https://img.shields.io/badge/Dotenv-5.0.1-FFE699"/>
+        <img src="https://img.shields.io/badge/CORS-2.8.4-FF9980"/>
+        <img src="https://img.shields.io/badge/Luxon-3.7.2-CAB8FF"/>
+        <img src="https://img.shields.io/badge/Winston-3.18.3-F4C1C8"/>
+        <img src="https://img.shields.io/badge/Morgan-1.10.1-8EE0A9"/>
+        <img src="https://img.shields.io/badge/ESLint-9.37.0-B0E0D3"/>
+        <img src="https://img.shields.io/badge/Prettier-3.6.2-FFE0B3"/>
         <img src="https://img.shields.io/badge/License-MIT-C0C0C0"/>
       </p>
       <!-- Data Collector -->
@@ -52,12 +58,19 @@
         <img src="https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&logoColor=white"/>
         <img src="https://img.shields.io/badge/Selenium-4.36.0-4B32C3?logo=selenium&logoColor=white"/>
         <img src="https://img.shields.io/badge/PyMongo-4.15.3-589636?logo=mongodb&logoColor=white"/>
-        <img src="https://img.shields.io/badge/Pandas-2.3.3-E3FF00?logo=pandas&logoColor=white"/>
+        <img src="https://img.shields.io/badge/Pandas-2.3.3-E3FF00?logo=pandas&logoColor=white"/><img src="https://img.shields.io/badge/python--dotenv-1.0.0-blue?logo=python&logoColor=white" alt="Python Dotenv"/>
+        <img src="https://img.shields.io/badge/feedparser-6.0.0-orange?logoColor=white" alt="Feedparser"/>
+        <img src="https://img.shields.io/badge/BeautifulSoup4-4.12.0-ff69b4?logo=python&logoColor=white" alt="BeautifulSoup4"/>
+        <img src="https://img.shields.io/badge/TextBlob-0.17.0-ff6600?logo=python&logoColor=white" alt="TextBlob"/>
+        <img src="https://img.shields.io/badge/KeyBERT-0.8.0-6f42c1?logo=python&logoColor=white" alt="KeyBERT"/>
+        <img src="https://img.shields.io/badge/Black-23.0.0-FDE2C6?logo=python&logoColor=white" alt="Black"/>
+        <img src="https://img.shields.io/badge/Isort-5.12.0-B1E0FF?logo=python&logoColor=white" alt="Isort"/>
+        <img src="https://img.shields.io/badge/Ruff-0.1.0-61DAFB?logo=python&logoColor=white" alt="Ruff"/>
         <img src="https://img.shields.io/badge/License-MIT-C0C0C0"/>
       </p>
     </div>
-</div>
 
+</div>
 
 ---
 
@@ -71,20 +84,23 @@ We welcome collaborators who wish to contribute and help enhance this trading to
 
 This ecosystem brings together three specialized subprojects, each focusing on a key aspect of the trading workflow.  
 From automated data collection and processing, through scalable backend services, to interactive visual analytics for end users,  
-***Trader Charts*** delivers a complete solution for technical analysis, market data visualization, and financial decision-making.
+**_Trader Charts_** delivers a complete solution for technical analysis, market data visualization, and financial decision-making.
 
 ### 1️⃣ Interactive Web Interface & React Financial Charts Exclusive version (Frontend)
+
 - Provides interactive charts and tools for performing technical analysis.
 - Built with React, MUI, Redux, and D3.js.
 - [See Interactive Web Interface →](https://github.com/TraderCharts/trader-charts-frontend)
 
 ### 2️⃣ API Multi-Microservices Architecture (Backend)
+
 - Handles API requests, processes data, and serves chart information to the Interactive Web Interface.
 - Built with Node.js, Express, Babel, MongoDB, and PostgreSQL via Sequelize.
 - Acts as the main microservice connecting the frontend with the data collector.
 - [See API Multi-Microservices Architecture →](https://github.com/TraderCharts/trader-charts-backend)
 
 ### 3️⃣ Web Scraping Automation Service (Data Collector)
+
 - Gathers and processes stock or asset data from various providers.
 - Cleans, structures, and stores data in MongoDB for use by the backend and Interactive Web Interface.
 - Built with Python, Selenium, PyMongo, and Pandas.
@@ -96,78 +112,81 @@ Together, these components provide a full ecosystem for technical analysis and d
 
 ### Trading Charts demo
 
-* [Demo Video](https://drive.google.com/file/d/1P6rXxtZItBR0-MQnIe-N1WODwIFOgjrf/view?usp=drive_link)
+- [Demo Video](https://drive.google.com/file/d/12vBuQgQfU6vP4CiAQe6WRfc9711vaEyW/view?usp=sharing)
 
 <div>
    <video width="320" height="240" controls autoplay>
-     <source src="https://drive.google.com/file/d/1P6rXxtZItBR0-MQnIe-N1WODwIFOgjrf/view?usp=drive_link" type="video/mp4">
+     <source src="https://drive.google.com/file/d/12vBuQgQfU6vP4CiAQe6WRfc9711vaEyW/view?usp=sharing" type="video/mov">
    </video>
 </div>
 
 ### Captures
 
-* Auth0 email login:
+- Auth0 email login:
 
-![Email login](assets/img/readme/auth0_email_login.png)
+![Login](assets/img/readme/auth0_login.png)
 
-* Auth0 Facebook login:
-
-![Facebook login](assets/img/readme/auth0_facebook_login.png)
-
-* Charts section:
+- Charts section:
 
 ![Charts section](assets/img/readme/charts_section.png)
 
-* Alerts section:
+- Alerts section:
 
 ![Alerts section](assets/img/readme/alerts_section.png)
 
+- Trending news and topic extraction with AI:
 
-* Alerts editable details:
+![trading-news-main-topics](assets/img/readme/trading-news-main-topics.png)
 
-![Alerts details](assets/img/readme/alerts_details.png)
-![Alerts details indicators](assets/img/readme/alerts_details_indicators.png)
-![Alerts details conditions](assets/img/readme/alerts_details_conditions.png)
+- Trending news and sentimental analysis with AI:
 
-* Profile Menu:
+![trading-news-sentiment-analysis](assets/img/readme/trading-news-sentiment-analysis.png)
 
-![Profile Menu](assets/img/readme/profile_menu_2.png)
+- Kairos AI Chat. Ask anything!
 
-* Tickers search box:
+![karios-ai](assets/img/readme/karios-ai.png)
 
-![Tickers search box](assets/img/readme/tickers_searchbox.png)
-
-* Interactive components of Fibonacci retracements and parallel channels:
+- Interactive components of Fibonacci retracements and parallel channels:
 
 ![fibonacci_and_parallel_channel_ic](assets/img/readme/fibonacci_and_parallel_channel_ic.png)
 
-* Interactive components of Trend lines:
+- Interactive components of Trend lines:
 
 ![trendlines_ic](assets/img/readme/trendlines_ic.png)
 
-* Interactive components of Rays and Extended lines:
+- Interactive components of Rays and Extended lines:
 
 ![rays_extendLines_ic](assets/img/readme/rays_extendLines_ic.png)
 
-* Gann fans interactive component:
+- Gann fans interactive component:
 
 ![gann_fans_ic](assets/img/readme/gann_fans_ic.png)
 
-* Gann fans interactive component:
+- Tickers search box:
 
-![gann_fans_ic](assets/img/readme/gann_fans_ic.png)
+![Tickers search box](assets/img/readme/tickers_searchbox.png)
 
-* Indicator's search box:
+- Indicator's search box:
 
 ![indicators_searchbox](assets/img/readme/indicators_searchbox.png)
 
-* Indicator's details:
+- Indicator's details:
 
 ![indicator_details_1](assets/img/readme/indicator_details_1.png)
 
-* Indicator's color picker:
+- Indicator's color picker:
 
 ![indicator_details_2](assets/img/readme/indicator_details_2.png)
+
+- Alerts editable details:
+
+![Alerts details](assets/img/readme/alerts_details.png)
+
+![Alerts details fields](assets/img/readme/alerts_details_fields.png)
+
+- Profile Menu:
+
+![Profile Menu](assets/img/readme/profile_menu_2.png)
 
 ## Contributors ✨
 
