@@ -1,0 +1,47 @@
+# kairos-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kairos-ai
+  labels:
+    app: kairos-ai
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kairos-ai
+  template:
+    metadata:
+      labels:
+        app: kairos-ai
+    spec:
+      containers:
+        - name: kairos-ai
+          image: kairos-ai # Asumiendo que ya buildeste esta imagen
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: kairos-config
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "200m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kairos-service
+spec:
+  type: NodePort
+  selector:
+    app: kairos-ai
+  ports:
+    - port: 3000
+      targetPort: 3000
+      nodePort: 30002 # Accesible en http://localhost:30002

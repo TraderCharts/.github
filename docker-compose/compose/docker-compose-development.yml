@@ -1,0 +1,65 @@
+services:
+  backend:
+    build:
+      context: ./trader-charts-backend
+      target: development
+    container_name: backend-development
+    ports:
+      - "${HOST_PORT:-3000}:3000"
+    volumes:
+      - ./trader-charts-backend:/app
+      - /app/node_modules
+    env_file:
+      - ./trader-charts-backend/.env.development.local
+    environment:
+      - MONGODB_URI=mongodb://host.docker.internal:27017/
+    command: ["npm", "run", "start-develop"]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  frontend:
+    build:
+      context: ./trader-charts-frontend
+      target: development
+    container_name: frontend-development
+    ports:
+      - "${FRONTEND_PORT:-3001}:3001"
+    volumes:
+      - ./trader-charts-frontend:/app
+      - /app/node_modules
+    env_file:
+      - ./trader-charts-frontend/.env.local
+    command: ["npm", "run", "start-develop"]
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+
+  kairos-ai:
+    build:
+      context: ./chat-ui
+      target: final
+    container_name: kairos-ai-development
+    ports:
+      - "5173:3000" # Maps the container port to the host. Makes it visible externally and directly accessible via the web
+    env_file:
+      - ./chat-ui/.env
+      - ./chat-ui/.env.docker
+    environment:
+      MONGODB_URL: mongodb://host.docker.internal:27017
+    restart: unless-stopped
+
+  data-collector:
+    build:
+      context: ./trader-charts-data-collector
+      target: development
+    container_name: data-collector-development
+    volumes:
+      - ./trader-charts-data-collector:/app
+    tty: true
+    env_file:
+      - ./trader-charts-data-collector/.env.local

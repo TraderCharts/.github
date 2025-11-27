@@ -1,0 +1,21 @@
+# k8s/jobs/analyze-topics-cronjob.yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: analyze-topics
+spec:
+  schedule: "45 0 */7 * *" # 45 mins después de RSS (0:45 AM cada 7 días)
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: data-collector
+              image: trader-charts-data-collector
+              imagePullPolicy: Never
+              command:
+                ["python", "-m", "mains.main_analyze_topic_model_rss_feeds"]
+              envFrom:
+                - configMapRef:
+                    name: data-collector-config
+          restartPolicy: Never

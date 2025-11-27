@@ -54,7 +54,7 @@
       </p>
       <!-- Data Collector -->
       <p>
-        <b>Web Scraping Automation Service (Data Collector</b><br/>
+        <b>Web Scraping Automation Service (Data Collector)</b><br/>
         <img src="https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&logoColor=white"/>
         <img src="https://img.shields.io/badge/Selenium-4.36.0-4B32C3?logo=selenium&logoColor=white"/>
         <img src="https://img.shields.io/badge/PyMongo-4.15.3-589636?logo=mongodb&logoColor=white"/>
@@ -107,6 +107,24 @@ From automated data collection and processing, through scalable backend services
 - [See Web Scraping Automation Service →](https://github.com/TraderCharts/trader-charts-data-collector)
 
 Together, these components provide a full ecosystem for technical analysis and data visualization.
+
+---
+
+### 4️⃣ Orchestration & Deployment
+
+Trader Charts can be run in both local development and production environments. The system leverages containerization and orchestration platforms to ensure scalability, consistency, and reliable deployment.
+
+**Orchestration Platforms:**
+
+- **Docker Compose** – Simplifies local development by allowing multiple microservices (API, data collector, frontend) to run together with a single command.
+- **Kubernetes** – Provides production-grade orchestration, scaling, and management of microservices across multiple nodes.
+
+> 💡 Tip: Step-by-step setup and deployment instructions are available in the internal guides.
+
+**Learn more:**
+
+- [Docker Compose Orchestration Guide](./../docker-compose/README_ORCHESTRATION_COMPOSE.md)
+- [Kubernetes Orchestration Guide](./../k8s/README_ORCHESTRATION_K8S.md)
 
 ---
 
