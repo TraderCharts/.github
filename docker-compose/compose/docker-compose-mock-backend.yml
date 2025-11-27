@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  # Mock Backend (mock server)
+  backend-mock:
+    build: ./trader-charts-backend
+    container_name: trader-charts-backend-mock
+    ports:
+      - "${HOST_PORT:-3000}:3000"
+    volumes:
+      - ./trader-charts-backend:/app
+      - /app/node_modules
+    env_file:
+      - ./trader-charts-backend/.env.development.local
+    environment:
+      - MONGODB_URI=mongodb://host.docker.internal:27017/
+    command: ["npm", "run", "start-mock"]
+    restart: unless-stopped

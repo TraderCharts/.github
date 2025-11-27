@@ -1,0 +1,20 @@
+# k8s/jobs/rss-feeds-cronjob.yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: rss-feeds-collector
+spec:
+  schedule: "0 0 */7 * *" # Medianoche cada 7 días
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: data-collector
+              image: trader-charts-data-collector
+              imagePullPolicy: Never
+              command: ["python", "-m", "mains.main_collect_rss_feeds"]
+              envFrom:
+                - configMapRef:
+                    name: data-collector-config
+          restartPolicy: Never
