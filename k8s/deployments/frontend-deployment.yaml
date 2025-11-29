@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-config
+data:
+  REACT_APP_API_URL: "http://backend-service:30000"
+  NODE_ENV: "production"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    app: frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: trader-charts-frontend
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80 # ← Nginx sirve en 80
+          envFrom:
+            - configMapRef:
+                name: frontend-config
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "250m"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80 # ← Probe en puerto 80
+            initialDelaySeconds: 30
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+spec:
+  type: NodePort # ← Como en tu config original que funciona
+  selector:
+    app: frontend
+  ports:
+    - port: 80 # Puerto interno del cluster
+      targetPort: 80 # Puerto del contenedor (nginx en 80)
+      nodePort: 30001 # Puerto en el host - OPCIONAL, puedes quitarlo si quieres que Kubernetes asigne uno automáticamente
