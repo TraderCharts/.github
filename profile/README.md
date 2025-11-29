@@ -30,6 +30,19 @@
         <img src="https://img.shields.io/badge/Prettier-2.8.8-FDE2C6?logo=prettier&logoColor=white"/>
         <img src="https://img.shields.io/badge/License-MIT-C0C0C0"/>
       </p>
+      <!-- Kairos AI -->
+      <p>
+        <b>Kairos AI (Frontend)</b><br/>
+        <img src="https://img.shields.io/badge/Svelte-5.33.3-4B32C3?logo=svelte&logoColor=white"/>
+        <img src="https://img.shields.io/badge/TypeScript-5.5.0-0A66C2?logo=typescript&logoColor=white"/>
+        <img src="https://img.shields.io/badge/Vite-6.3.5-F9A03C?logo=vite&logoColor=white"/>
+        <img src="https://img.shields.io/badge/TailwindCSS-3.4.0-2874A6?logo=tailwindcss&logoColor=white"/>
+        <img src="https://img.shields.io/badge/OpenAI-4.44.0-0A66C2?logo=openai&logoColor=white"/>
+        <img src="https://img.shields.io/badge/HuggingFace-4.11.3-007FFF?logo=huggingface&logoColor=white"/>
+        <img src="https://img.shields.io/badge/ESLint-8.28.0-61DAFB?logo=eslint&logoColor=white"/>
+        <img src="https://img.shields.io/badge/Prettier-3.5.3-FDE2C6?logo=prettier&logoColor=white"/>
+        <img src="https://img.shields.io/badge/License-MIT-C0C0C0"/>
+      </p>
       <!-- Backend -->
       <p><b>API Multi-Microservices Architecture (Backend)</b><br/>
         <img src="https://img.shields.io/badge/Node-18.17.1-0078FF?logo=node.js&logoColor=white"/>
@@ -86,10 +99,12 @@ This ecosystem brings together three specialized subprojects, each focusing on a
 From automated data collection and processing, through scalable backend services, to interactive visual analytics for end users,  
 **_Trader Charts_** delivers a complete solution for technical analysis, market data visualization, and financial decision-making.
 
-### 1️⃣ Interactive Web Interface & React Financial Charts Exclusive version (Frontend)
+### 1️⃣ Interactive Web Interface & React Financial Charts Exclusive version & Kairos AI (Frontend)
 
 - Provides interactive charts and tools for performing technical analysis.
 - Built with React, MUI, Redux, and D3.js.
+- Includes React Financial Charts (Exclusive version) — advanced charting components for financial data visualization.
+- Includes Kairos AI — a Svelte-based AI chat and data interface, enhancing user interactions and AI-powered features.
 - [See Interactive Web Interface →](https://github.com/TraderCharts/trader-charts-frontend)
 
 ### 2️⃣ API Multi-Microservices Architecture (Backend)
