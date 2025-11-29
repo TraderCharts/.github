@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Uso: ./up-compose.sh [all|frontend|backend|kairos|data-collector]
+# Uso: ./up-compose.sh [all|frontend|backend|kairos|compute-services]
 SERVICE=${1:-all}
 ENV=${2:-production}
 
@@ -24,10 +24,10 @@ case "$SERVICE" in
     docker-compose --env-file .env.${ENV} build kairos-ai
     docker-compose --env-file .env.${ENV} up -d kairos-ai
     ;;
-  data-collector)
-    docker-compose --env-file .env.${ENV} build data-collector
+  compute-services)
+    docker-compose --env-file .env.${ENV} build compute-services
     echo "Data collector jobs run manually via:"
-    echo "  docker-compose run --rm data-collector python -m mains.<job_module>"
+    echo "  docker-compose run --rm compute-services python -m mains.<job_module>"
     ;;
   *)
     echo "❌ Unknown service: $SERVICE"

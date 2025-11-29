@@ -2,7 +2,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: historical-data-collector
+  name: historical-compute-services
 spec:
   schedule: "0 0 */21 * *" # Medianoche cada 21 días
   jobTemplate:
@@ -10,11 +10,11 @@ spec:
       template:
         spec:
           containers:
-            - name: data-collector
-              image: trader-charts-data-collector
+            - name: compute-services
+              image: trader-charts-compute-services
               imagePullPolicy: Never
               command: ["python", "-m", "mains.main_collect_historical_data"]
               envFrom:
                 - configMapRef:
-                    name: data-collector-config
+                    name: compute-services-config
           restartPolicy: Never

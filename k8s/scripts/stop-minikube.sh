@@ -6,10 +6,10 @@ echo "🛑 Stopping Minikube..."
 # 1️⃣ Delete deployments to avoid leftover pods
 # ----------------------------------------------------------------------------
 echo "🗑️ Deleting all relevant deployments..."
-minikube kubectl -- delete deployment backend frontend kairos-ai data-collector --ignore-not-found
+minikube kubectl -- delete deployment backend frontend kairos-ai compute-services --ignore-not-found
 
 # Delete any leftover pods for these services
-PENDING_PODS=$(minikube kubectl -- get pods --no-headers -o custom-columns=":metadata.name" | grep -E 'backend|frontend|kairos-ai|data-collector' || true)
+PENDING_PODS=$(minikube kubectl -- get pods --no-headers -o custom-columns=":metadata.name" | grep -E 'backend|frontend|kairos-ai|compute-services' || true)
 if [[ -n "$PENDING_PODS" ]]; then
     echo "🗑️ Deleting leftover pods..."
     for pod in $PENDING_PODS; do

@@ -53,13 +53,13 @@ services:
       MONGODB_URL: mongodb://host.docker.internal:27017
     restart: unless-stopped
 
-  data-collector:
+  compute-services:
     build:
-      context: ./trader-charts-data-collector
+      context: ./trader-charts-compute-services
       target: development
-    container_name: data-collector-development
+    container_name: compute-services-development
     volumes:
-      - ./trader-charts-data-collector:/app
+      - ./trader-charts-compute-services:/app
     tty: true
     env_file:
-      - ./trader-charts-data-collector/.env.local
+      - ./trader-charts-compute-services/.env.local

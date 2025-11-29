@@ -12,7 +12,7 @@ set -euo pipefail
 #     ./k8s/scripts/deploy-minikube.sh all staging --force-recreate
 #
 #  Valid services:
-#     all | frontend | backend | kairos | data-collector
+#     all | frontend | backend | kairos | compute-services
 #
 #  Valid environments:
 #     development | staging | production
@@ -28,7 +28,7 @@ if [[ $# -lt 2 ]]; then
   echo "   ./k8s/scripts/deploy-minikube.sh <service> <environment> [--force-recreate]"
   echo ""
   echo "   Valid services:"
-  echo "     all | frontend | backend | kairos | data-collector"
+  echo "     all | frontend | backend | kairos | compute-services"
   echo ""
   echo "   Valid environments:"
   echo "     development | staging | production"
@@ -43,7 +43,7 @@ FORCE_RECREATE=${3:-}
 # -------------------------------
 # Validate service
 # -------------------------------
-ALLOWED_SERVICES=("all" "frontend" "backend" "kairos" "data-collector")
+ALLOWED_SERVICES=("all" "frontend" "backend" "kairos" "compute-services")
 if [[ ! " ${ALLOWED_SERVICES[*]} " =~ " $SERVICE " ]]; then
   echo "❌ Invalid service: $SERVICE"
   echo "   Allowed: ${ALLOWED_SERVICES[*]}"
@@ -90,10 +90,10 @@ if [[ "$FORCE_RECREATE" == "--force-recreate" ]]; then
   echo "⚠️ Force recreate enabled: cleaning previous deployments, pods, and port-forwards..."
 
   # Delete all deployments for services
-  minikube kubectl -- delete deployment backend frontend kairos-ai data-collector --ignore-not-found
+  minikube kubectl -- delete deployment backend frontend kairos-ai compute-services --ignore-not-found
 
   # Delete any remaining pods for these services
-  PENDING_PODS=$(minikube kubectl -- get pods --no-headers -o custom-columns=":metadata.name" | grep -E 'backend|frontend|kairos-ai|data-collector' || true)
+  PENDING_PODS=$(minikube kubectl -- get pods --no-headers -o custom-columns=":metadata.name" | grep -E 'backend|frontend|kairos-ai|compute-services' || true)
   if [[ -n "$PENDING_PODS" ]]; then
     echo "🗑️ Deleting leftover pods..."
     for pod in $PENDING_PODS; do
@@ -121,7 +121,7 @@ case "$SERVICE" in
   all)
     docker build --target production -t trader-charts-frontend ./trader-charts-frontend
     docker build --target production -t trader-charts-backend ./trader-charts-backend
-    docker build --target production -t trader-charts-data-collector ./trader-charts-data-collector
+    docker build --target production -t trader-charts-compute-services ./trader-charts-compute-services
     docker build --target final -t kairos-ai ./chat-ui
     ;;
   frontend)
@@ -133,13 +133,13 @@ case "$SERVICE" in
   kairos)
     docker build --target final -t kairos-ai ./chat-ui
     ;;
-  data-collector)
-    docker build --target production -t trader-charts-data-collector ./trader-charts-data-collector
+  compute-services)
+    docker build --target production -t trader-charts-compute-services ./trader-charts-compute-services
     ;;
 esac
 
 # ----------------------------------------------------------------------------
-# 4️⃣ Apply deployments and ConfigMaps (skip data-collector)
+# 4️⃣ Apply deployments and ConfigMaps (skip compute-services)
 # ----------------------------------------------------------------------------
 echo ""
 echo "📄 Applying Kubernetes manifests and ConfigMaps..."
@@ -154,7 +154,7 @@ if [[ "$SERVICE" == "all" ]]; then
   for svc in frontend backend kairos; do
     APPLY_SERVICE_DEPLOYMENTS "$svc"
   done
-elif [[ "$SERVICE" != "data-collector" ]]; then
+elif [[ "$SERVICE" != "compute-services" ]]; then
   APPLY_SERVICE_DEPLOYMENTS "$SERVICE"
 fi
 
@@ -186,7 +186,7 @@ if [[ "$SERVICE" == "all" ]]; then
     ROLL_DEPLOYMENT "$s"
   done
 else
-  if [[ "$SERVICE" != "data-collector" ]]; then
+  if [[ "$SERVICE" != "compute-services" ]]; then
     ROLL_DEPLOYMENT "$SERVICE"
   fi
 fi
@@ -232,14 +232,14 @@ fi
 # ----------------------------------------------------------------------------
 # 8️⃣ Data Jobs (Manual vs CronJobs)
 # ----------------------------------------------------------------------------
-if [[ "$SERVICE" == "all" || "$SERVICE" == "data-collector" ]]; then
+if [[ "$SERVICE" == "all" || "$SERVICE" == "compute-services" ]]; then
   echo ""
-  echo "🧠 Data Collector Jobs — Manual execution and CronJobs"
+  echo "🧠 Compute Services Jobs — Manual execution and CronJobs"
   echo ""
   echo "  CronJobs defined in ./k8s/jobs/ run automatically on schedule (e.g., every 7 or 21 days)."
   echo ""
   echo "  To run a job manually (one-time execution):"
-  echo "    minikube kubectl -- create job manual-training --image=trader-charts-data-collector -- \\"
+  echo "    minikube kubectl -- create job manual-training --image=trader-charts-compute-services -- \\"
   echo "      python -m mains.main_finetune_sentiment_model"
   echo ""
   echo "  To force execution of an existing CronJob:"

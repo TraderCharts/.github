@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Uso: ./down-compose.sh [all|frontend|backend|kairos|data-collector]
+# Uso: ./down-compose.sh [all|frontend|backend|kairos|compute-services]
 SERVICE=${1:-all}
 ENV=${2:-production}
 
@@ -10,7 +10,7 @@ case "$SERVICE" in
   all)
     docker-compose --env-file .env.${ENV} down
     ;;
-  frontend|backend|kairos|data-collector)
+  frontend|backend|kairos|compute-services)
     docker-compose --env-file .env.${ENV} stop $SERVICE
     docker-compose --env-file .env.${ENV} rm -f $SERVICE
     ;;

@@ -20,7 +20,7 @@ Trader Charts is composed of multiple services orchestrated with Docker Compose:
 - **Backend** — Node.js REST API
 - **Frontend** — React application served via Nginx
 - **Kairos AI** — External AI service, embeddable in iframes
-- **Data Collector** — Python jobs for historical data, RSS feeds, sentiment analysis, and topic modeling
+- **Compute Services** — Python jobs for historical data, RSS feeds, sentiment analysis, and topic modeling
 
 Compose manages all dependencies, networking, and ports. Ports are **fixed** and defined in the `docker-compose.yml` file.
 
@@ -38,7 +38,7 @@ Each service requires a Docker image. You can build them individually or all at 
 # Build all images
 docker build -t trader-charts-frontend ./trader-charts-frontend
 docker build -t trader-charts-backend ./trader-charts-backend
-docker build -t trader-charts-data-collector ./trader-charts-data-collector
+docker build -t trader-charts-compute-services ./trader-charts-compute-services
 docker build -t kairos-ai ./../chat-ui
 
 # Build individual service
@@ -113,27 +113,27 @@ docker-compose stop backend
 
 ---
 
-## Data Collector Jobs
+## Compute Services Jobs
 
-The **data-collector** runs standalone Python jobs. These jobs do not run continuously; they terminate after execution.
+The **compute-services** runs standalone Python jobs. These jobs do not run continuously; they terminate after execution.
 
 ### Example Job Execution
 
 ```bash
 # Collect historical data
-docker-compose run --rm data-collector python -m mains.main_collect_historical_data
+docker-compose run --rm compute-services python -m mains.main_collect_historical_data
 
 # Collect RSS feeds
-docker-compose run --rm data-collector python -m mains.main_collect_rss_feeds
+docker-compose run --rm compute-services python -m mains.main_collect_rss_feeds
 
 # Train sentiment analysis model
-docker-compose run --rm data-collector python -m mains.main_finetune_sentiment_model
+docker-compose run --rm compute-services python -m mains.main_finetune_sentiment_model
 
 # Analyze sentiment from RSS feeds
-docker-compose run --rm data-collector python -m mains.main_analyze_sentiment_model_rss_feeds
+docker-compose run --rm compute-services python -m mains.main_analyze_sentiment_model_rss_feeds
 
 # Analyze topic models from RSS feeds
-docker-compose run --rm data-collector python -m mains.main_analyze_topic_model_rss_feeds
+docker-compose run --rm compute-services python -m mains.main_analyze_topic_model_rss_feeds
 ```
 
 **Notes:**
@@ -155,7 +155,7 @@ docker-compose run --rm data-collector python -m mains.main_analyze_topic_model_
 - **Production**
   - Uses built images.
   - Connects to staging or production databases.
-  - Data collector jobs are executed manually or via scheduler.
+  - Compute Services jobs are executed manually or via scheduler.
 - **Kairos AI**
   - Available in dev and production.
   - Embedded via iframe.
@@ -167,7 +167,7 @@ docker-compose run --rm data-collector python -m mains.main_analyze_topic_model_
 - Build images before starting services, especially after code changes.
 - Verify containers with `docker ps` and `docker-compose logs`.
 - Use `docker-compose stop` or `down` to manage resources.
-- Run data-collector jobs manually to control execution.
+- Run compute-services jobs manually to control execution.
 - Fixed ports in Compose ensure predictable service access.
 
 ---
@@ -186,8 +186,8 @@ docker-compose up -d backend
 docker-compose stop backend
 docker-compose down
 
-# Run data collector jobs
-docker-compose run --rm data-collector python -m mains.main_collect_historical_data
+# Run Compute Services jobs
+docker-compose run --rm compute-services python -m mains.main_collect_historical_data
 
 # Inspect running containers
 docker ps

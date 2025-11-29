@@ -72,8 +72,8 @@ docker build --target production -t trader-charts-frontend ./trader-charts-front
 docker build --target production -t trader-charts-backend ./trader-charts-backend
 docker build --target final -t kairos-ai ./../chat-ui
 
-# Data collector (for jobs)
-docker build --target production -t trader-charts-data-collector ./trader-charts-data-collector
+# Compute Services (for jobs)
+docker build --target production -t trader-charts-compute-services ./trader-charts-compute-services
 ```
 
 > 💡 All builds must be done **while connected to Minikube’s Docker** environment.
@@ -97,7 +97,7 @@ kubectl apply -f ./k8s/deployments/kairos-deployment.yaml
 ./k8s/configs/update-backend-config.sh
 ./k8s/configs/update-frontend-config.sh
 ./k8s/configs/update-kairos-config.sh
-./k8s/configs/update-data-collector-config.sh
+./k8s/configs/update-compute-services-config.sh
 ```
 
 These scripts handle automatic generation of ConfigMaps based on `.env` files.
@@ -136,7 +136,7 @@ These scripts handle automatic generation of ConfigMaps based on `.env` files.
 kubectl rollout restart deployment/backend
 kubectl rollout restart deployment/frontend
 kubectl rollout restart deployment/kairos-ai
-kubectl rollout restart deployment/data-collector
+kubectl rollout restart deployment/compute-services
 ```
 
 > ⚠️ Always run a **rollout restart** after updating ConfigMaps.
@@ -227,12 +227,12 @@ You should see an error indicating that the server is not reachable.
 
 ### Automated CronJobs
 
-| Job                         | Schedule (UTC) | Description                                      |
-| --------------------------- | -------------- | ------------------------------------------------ |
-| `historical-data-collector` | `0 0 */21 * *` | Collects historical market data                  |
-| `rss-feeds-collector`       | `0 0 */7 * *`  | Gathers RSS feeds for sentiment & topic analysis |
-| `analyze-sentiment`         | `30 0 */7 * *` | Performs sentiment scoring (30 min after RSS)    |
-| `analyze-topics`            | `45 0 */7 * *` | Performs topic clustering (45 min after RSS)     |
+| Job                           | Schedule (UTC) | Description                                      |
+| ----------------------------- | -------------- | ------------------------------------------------ |
+| `historical-compute-services` | `0 0 */21 * *` | Collects historical market data                  |
+| `rss-feeds-collector`         | `0 0 */7 * *`  | Gathers RSS feeds for sentiment & topic analysis |
+| `analyze-sentiment`           | `30 0 */7 * *` | Performs sentiment scoring (30 min after RSS)    |
+| `analyze-topics`              | `45 0 */7 * *` | Performs topic clustering (45 min after RSS)     |
 
 ### Manual Job Example
 
@@ -243,7 +243,7 @@ You should see an error indicating that the server is not reachable.
 Run manually:
 
 ```bash
-kubectl create job manual-training --image=trader-charts-data-collector -- \
+kubectl create job manual-training --image=trader-charts-compute-services -- \
   python -m mains.main_finetune_sentiment_model
 ```
 
@@ -273,7 +273,7 @@ kubectl apply -f ./k8s/jobs/analyze-topics-cronjob.yaml
 ### Force CronJob Execution
 
 ```bash
-kubectl create job --from=cronjob/historical-data-collector manual-historical-data
+kubectl create job --from=cronjob/historical-compute-services manual-historical-data
 kubectl create job --from=cronjob/rss-feeds-collector manual-rss-feeds
 kubectl create job --from=cronjob/analyze-sentiment manual-sentiment
 kubectl create job --from=cronjob/analyze-topics manual-topics
@@ -299,7 +299,7 @@ kubectl delete job manual-sentiment
 kubectl delete job manual-topics
 
 # Delete CronJobs
-kubectl delete cronjob historical-data-collector
+kubectl delete cronjob historical-compute-services
 kubectl delete cronjob rss-feeds-collector
 kubectl delete cronjob analyze-sentiment
 kubectl delete cronjob analyze-topics
@@ -310,9 +310,9 @@ kubectl delete cronjob analyze-topics
 ```bash
 kubectl get job train-sentiment-model
 kubectl get job manual-historical-data
-kubectl get cronjob historical-data-collector
+kubectl get cronjob historical-compute-services
 kubectl get cronjob rss-feeds-collector
-kubectl describe cronjob historical-data-collector
+kubectl describe cronjob historical-compute-services
 kubectl describe job train-sentiment-model
 ```
 
@@ -374,7 +374,7 @@ kubectl delete job <name>
 - 🚀 **Rollout restarts** are required to propagate env updates
 - 🌐 **NodePort range:** 30000–32767 in Minikube
 - 🧩 **Local MongoDB:** accessible via `host.docker.internal`
-- 🧱 **Data collector image** must be built before running jobs
+- 🧱 **Compute Services image** must be built before running jobs
 
 ---
 

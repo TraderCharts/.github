@@ -52,9 +52,9 @@
         <img src="https://img.shields.io/badge/Prettier-3.6.2-FFE0B3"/>
         <img src="https://img.shields.io/badge/License-MIT-C0C0C0"/>
       </p>
-      <!-- Data Collector -->
+      <!-- Compute Services -->
       <p>
-        <b>Web Scraping Automation Service (Data Collector)</b><br/>
+        <b>LLM-powered AI & Data Automation Services (Compute Services)</b><br/>
         <img src="https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&logoColor=white"/>
         <img src="https://img.shields.io/badge/Selenium-4.36.0-4B32C3?logo=selenium&logoColor=white"/>
         <img src="https://img.shields.io/badge/PyMongo-4.15.3-589636?logo=mongodb&logoColor=white"/>
@@ -96,15 +96,15 @@ From automated data collection and processing, through scalable backend services
 
 - Handles API requests, processes data, and serves chart information to the Interactive Web Interface.
 - Built with Node.js, Express, Babel, MongoDB, and PostgreSQL via Sequelize.
-- Acts as the main microservice connecting the frontend with the data collector.
+- Acts as the main microservice connecting the frontend with databases.
 - [See API Multi-Microservices Architecture →](https://github.com/TraderCharts/trader-charts-backend)
 
-### 3️⃣ Web Scraping Automation Service (Data Collector)
+### 3️⃣ LLM-powered AI & Data Automation Services (Compute Services)
 
 - Gathers and processes stock or asset data from various providers.
 - Cleans, structures, and stores data in MongoDB for use by the backend and Interactive Web Interface.
 - Built with Python, Selenium, PyMongo, and Pandas.
-- [See Web Scraping Automation Service →](https://github.com/TraderCharts/trader-charts-data-collector)
+- [See LLM-powered AI & Data Automation Services →](https://github.com/TraderCharts/trader-charts-compute-services)
 
 Together, these components provide a full ecosystem for technical analysis and data visualization.
 
@@ -116,7 +116,7 @@ Trader Charts can be run in both local development and production environments. 
 
 **Orchestration Platforms:**
 
-- **Docker Compose** – Simplifies local development by allowing multiple microservices (API, data collector, frontend) to run together with a single command.
+- **Docker Compose** – Simplifies local development by allowing multiple microservices (API, compute services, frontend) to run together with a single command.
 - **Kubernetes** – Provides production-grade orchestration, scaling, and management of microservices across multiple nodes.
 
 > 💡 Tip: Step-by-step setup and deployment instructions are available in the internal guides.

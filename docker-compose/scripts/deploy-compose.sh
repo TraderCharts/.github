@@ -12,7 +12,7 @@ set -euo pipefail
 #     ./deploy-compose.sh all production --force-recreate
 #
 # Valid services:
-#     all | frontend | backend | kairos-ai | data-collector
+#     all | frontend | backend | kairos-ai | compute-services
 #
 # Valid environments:
 #     development | mock-backend | mock-frontend | production
@@ -22,7 +22,7 @@ set -euo pipefail
 #     2. Copies the corresponding docker-compose file to root
 #     3. Starts the requested services
 #     4. Shows running containers and quick checks
-#     5. Shows data-collector job commands
+#     5. Shows compute-services job commands
 #     6. Mentions the cleanup script
 # ============================================================================
 
@@ -78,7 +78,7 @@ case "$SERVICE" in
   all)
     docker build --target $DOCKER_TARGET -t trader-charts-frontend ./trader-charts-frontend
     docker build --target $DOCKER_TARGET -t trader-charts-backend ./trader-charts-backend
-    docker build --target $DOCKER_TARGET -t trader-charts-data-collector ./trader-charts-data-collector
+    docker build --target $DOCKER_TARGET -t trader-charts-compute-services ./trader-charts-compute-services
     docker build --target final -t kairos-ai ./chat-ui
     ;;
   frontend)
@@ -90,8 +90,8 @@ case "$SERVICE" in
   kairos-ai)
     docker build --target final -t kairos-ai ./chat-ui
     ;;
-  data-collector)
-    docker build --target $DOCKER_TARGET -t trader-charts-data-collector ./trader-charts-data-collector
+  compute-services)
+    docker build --target $DOCKER_TARGET -t trader-charts-compute-services ./trader-charts-compute-services
     ;;
   *)
     echo "❌ Unknown service: $SERVICE"
@@ -146,15 +146,15 @@ echo "  Kairos AI Interface: http://localhost:5173"
 echo ""
 
 # ----------------------------------------------------------------------------
-# Data collector jobs
+# Compute Services jobs
 # ----------------------------------------------------------------------------
-if [[ "$SERVICE" == "all" || "$SERVICE" == "data-collector" ]]; then
-  echo "📌 Data Collector manual jobs:"
-  echo "  docker-compose -f $COMPOSE_FILE run --rm data-collector python -m mains.main_collect_historical_data"
-  echo "  docker-compose -f $COMPOSE_FILE run --rm data-collector python -m mains.main_collect_rss_feeds"
-  echo "  docker-compose -f $COMPOSE_FILE run --rm data-collector python -m mains.main_finetune_sentiment_model"
-  echo "  docker-compose -f $COMPOSE_FILE run --rm data-collector python -m mains.main_analyze_sentiment_model_rss_feeds"
-  echo "  docker-compose -f $COMPOSE_FILE run --rm data-collector python -m mains.main_analyze_topic_model_rss_feeds"
+if [[ "$SERVICE" == "all" || "$SERVICE" == "compute-services" ]]; then
+  echo "📌 Compute Services manual jobs:"
+  echo "  docker-compose -f $COMPOSE_FILE run --rm compute-services python -m mains.main_collect_historical_data"
+  echo "  docker-compose -f $COMPOSE_FILE run --rm compute-services python -m mains.main_collect_rss_feeds"
+  echo "  docker-compose -f $COMPOSE_FILE run --rm compute-services python -m mains.main_finetune_sentiment_model"
+  echo "  docker-compose -f $COMPOSE_FILE run --rm compute-services python -m mains.main_analyze_sentiment_model_rss_feeds"
+  echo "  docker-compose -f $COMPOSE_FILE run --rm compute-services python -m mains.main_analyze_topic_model_rss_feeds"
   echo ""
 fi
 

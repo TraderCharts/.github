@@ -44,11 +44,11 @@ services:
       MONGODB_URL: mongodb://host.docker.internal:27017
     restart: unless-stopped
 
-data-collector-prod:
+compute-services-prod:
   build:
-    context: ./trader-charts-data-collector
+    context: ./trader-charts-compute-services
     target: production
   container_name: collector-prod
   restart: "no" # Job runs once and stops
   env_file:
-    - ./trader-charts-data-collector/.env.staging
+    - ./trader-charts-compute-services/.env.staging

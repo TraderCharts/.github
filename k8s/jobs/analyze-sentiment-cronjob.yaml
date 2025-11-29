@@ -10,12 +10,12 @@ spec:
       template:
         spec:
           containers:
-            - name: data-collector
-              image: trader-charts-data-collector
+            - name: compute-services
+              image: trader-charts-compute-services
               imagePullPolicy: Never
               command:
                 ["python", "-m", "mains.main_analyze_sentiment_model_rss_feeds"]
               envFrom:
                 - configMapRef:
-                    name: data-collector-config
+                    name: compute-services-config
           restartPolicy: Never
