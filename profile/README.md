@@ -85,6 +85,8 @@
 
 </div>
 
+> **Documentation updated through:** `v7.x`
+
 ---
 
 🚀 **Want to contribute?**
@@ -95,23 +97,26 @@ We welcome collaborators who wish to contribute and help enhance this trading to
 
 ## Trader Charts - Overview
 
-This ecosystem brings together three specialized subprojects, each focusing on a key aspect of the trading workflow.  
-From automated data collection and processing, through scalable backend services, to interactive visual analytics for end users,  
+This ecosystem brings together three specialized subprojects, each focusing on a key aspect of the trading workflow.
+From automated data collection and processing, through scalable backend services, to interactive visual analytics for end users,
 **_Trader Charts_** delivers a complete solution for technical analysis, market data visualization, and financial decision-making.
 
 ### 1️⃣ Interactive Web Interface & React Financial Charts Exclusive version & Kairos AI (Frontend)
 
-- Provides interactive charts and tools for performing technical analysis.
+- Provides interactive charts and tools for performing technical analysis and financial analysis.
 - Built with React, MUI, Redux, and D3.js.
 - Includes React Financial Charts (Exclusive version) — advanced charting components for financial data visualization.
+- Includes financial analysis tools, bond analytics, expression building, and watchlist management.
+- Provides authentication and user identity management through Auth0.
 - Includes Kairos AI — a Svelte-based AI chat and data interface, enhancing user interactions and AI-powered features.
 - [See Interactive Web Interface →](https://github.com/TraderCharts/trader-charts-frontend)
 
 ### 2️⃣ API Multi-Microservices Architecture (Backend)
 
-- Handles API requests, processes data, and serves chart information to the Interactive Web Interface.
+- Handles API requests, processes data, and serves market and financial data to the Interactive Web Interface.
 - Built with Node.js, Express, Babel, MongoDB, and PostgreSQL via Sequelize.
-- Acts as the main microservice connecting the frontend with databases.
+- Acts as the main microservice connecting the frontend with databases and external data services.
+- Provides market data, financial analysis, bond metrics, and watchlist management services.
 - [See API Multi-Microservices Architecture →](https://github.com/TraderCharts/trader-charts-backend)
 
 ### 3️⃣ LLM-powered AI & Data Automation Services (Compute Services)
@@ -119,6 +124,8 @@ From automated data collection and processing, through scalable backend services
 - Gathers and processes stock or asset data from various providers.
 - Cleans, structures, and stores data in MongoDB for use by the backend and Interactive Web Interface.
 - Built with Python, Selenium, PyMongo, and Pandas.
+- Automates market data collection and processing workflows.
+- Supports incremental data collection and optimized processing of multiple assets.
 - [See LLM-powered AI & Data Automation Services →](https://github.com/TraderCharts/trader-charts-compute-services)
 
 Together, these components provide a full ecosystem for technical analysis and data visualization.
@@ -143,83 +150,107 @@ Trader Charts can be run in both local development and production environments. 
 
 ---
 
-### Trading Charts demo
+## Trading Charts demo
 
-- [Demo Video](https://drive.google.com/file/d/12vBuQgQfU6vP4CiAQe6WRfc9711vaEyW/view?usp=sharing)
+### Drawing Tools
 
-<div>
-   <video width="320" height="240" controls autoplay>
-     <source src="https://drive.google.com/file/d/12vBuQgQfU6vP4CiAQe6WRfc9711vaEyW/view?usp=sharing" type="video/mov">
-   </video>
-</div>
+Arrow, Rectangle, FreehandBrush, Linear Regression Channel and more:
 
-### Captures
+![Drawing Tools](assets/img/readme/charts/drawingTools/more_interactive_feats.png)
 
 - Auth0 email login:
 
-![Login](assets/img/readme/auth0_login.png)
+![Login](assets/img/readme/sections/auth0_login.png)
 
-- Charts section:
+- Watchlists section:
 
-![Charts section](assets/img/readme/charts_section.png)
-
-- Alerts section:
-
-![Alerts section](assets/img/readme/alerts_section.png)
+![Watchlists section](assets/img/readme/sections/watchlists_section.png)
 
 - Trending news and topic extraction with AI:
 
-![trading-news-main-topics](assets/img/readme/trading-news-main-topics.png)
+![trading-news-main-topics](assets/img/readme/sections/trading-news-main-topics.png)
 
 - Trending news and sentimental analysis with AI:
 
-![trading-news-sentiment-analysis](assets/img/readme/trading-news-sentiment-analysis.png)
+![trading-news-sentiment-analysis](assets/img/readme/trendingNews/trading-news-sentiment-analysis.png)
 
 - Kairos AI Chat. Ask anything!
 
-![karios-ai](assets/img/readme/karios-ai.png)
+![karios-ai](assets/img/readme/sections/karios-ai.png)
 
-- Interactive components of Fibonacci retracements and parallel channels:
+- Instrument Details
 
-![fibonacci_and_parallel_channel_ic](assets/img/readme/fibonacci_and_parallel_channel_ic.png)
+![Instrument-details](assets/img/readme/instrumentDetails/bonds/bondDetails1.png)
 
-- Interactive components of Trend lines:
+- Bonds Coupon Schedule
 
-![trendlines_ic](assets/img/readme/trendlines_ic.png)
+![bonds-coupon-schedule](assets/img/readme/instrumentDetails/bonds/bondDetails4.png)
 
-- Interactive components of Rays and Extended lines:
+Tickers search & Expression Builder:
 
-![rays_extendLines_ic](assets/img/readme/rays_extendLines_ic.png)
+![Tickers-search](assets/img/readme/charts/tickers_searchbox.png)
 
-- Gann fans interactive component:
+### Chart Controls
 
-![gann_fans_ic](assets/img/readme/gann_fans_ic.png)
+TimeRange selection (1M, 3M, 6M, 1Y, 5Y) and Linear/Log scale toggle:
 
-- Tickers search box:
+![Linear/Log scale](assets/img/readme/charts/controlsbar-timerange-selection.jpg)
 
-![Tickers search box](assets/img/readme/tickers_searchbox.png)
+![TimeRange selection](assets/img/readme/charts/controlsbar-linear-log-scale.jpg)
 
-- Indicator's search box:
+### Day/Week/Month Selection
 
-![indicators_searchbox](assets/img/readme/indicators_searchbox.png)
+Candle interval selection on main top bar:
 
-- Indicator's details:
+![Day/Week/Month Selection](assets/img/readme/charts/candle-interval-selection.jpg)
 
-![indicator_details_1](assets/img/readme/indicator_details_1.png)
+### Interactive Tools
 
-- Indicator's color picker:
+Interactive components of Fibonacci retracements and parallel channels:
 
-![indicator_details_2](assets/img/readme/indicator_details_2.png)
+![fibonacci_and_parallel_channel_ic](assets/img/readme/charts/drawingTools/fibonacci_and_parallel_channel.png)
 
-- Alerts editable details:
+Interactive components of Trend lines, Rays and Extended lines:
 
-![Alerts details](assets/img/readme/alerts_details.png)
+![trendlines_ic](assets/img/readme/charts/drawingTools/trendlines.png)
 
-![Alerts details fields](assets/img/readme/alerts_details_fields.png)
+Gann fans interactive component:
 
-- Profile Menu:
+![gann_fans_ic](assets/img/readme/charts/drawingTools/gann_fans.png)
 
-![Profile Menu](assets/img/readme/profile_menu_2.png)
+Price Range interactive component:
+
+![price_range](assets/img/readme/charts/userInteractions/price-range-measurement-tool.png)
+
+### Search & Indicators
+
+Indicator's details % color picker:
+
+![indicator_details_styles](assets/img/readme/charts/indicator_details_styles.png)
+
+### Watchlists System
+
+Edit Watchlists:
+
+![Edit Watchlists](assets/img/readme/watchlists/watchlists_edit.png)
+
+### Instrument Details
+
+- Instrument Documentation
+
+![Instrument-details-documentation](assets/img/readme/instrumentDetails/bonds/bondDetails6.png)
+
+- Bonds Cash Flow Payback
+
+![bonds-cash-flow-payback](assets/img/readme/instrumentDetails/bonds/bondDetails2.png)
+
+- Bonds Amortization Schedule
+
+![bonds-amortization-schedule](assets/img/readme/instrumentDetails/bonds/bondDetails3.png)
+
+- Bonds Payment Events
+
+![bonds-payment-events](assets/img/readme/instrumentDetails/bonds/bondDetails5.png)
 
 ## Contributors ✨
 
