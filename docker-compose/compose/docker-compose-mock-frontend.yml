@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  frontend-mock-api:
+    build: ./trader-charts-frontend
+    container_name: trader-charts-frontend-mock-api
+    ports:
+      - "${HOST_PORT:-3000}:3000"
+    volumes:
+      - ./trader-charts-frontend:/app
+      - /app/node_modules
+    environment:
+      - MONGODB_URI=mongodb://host.docker.internal:27017/
+    command: ["npm", "run", "mock-api"]
+    restart: unless-stopped
+
+  # Frontend for mock environment
+  frontend-mock:
+    build: ./trader-charts-frontend
+    container_name: trader-charts-frontend-mock
+    ports:
+      - "${FRONTEND_PORT:-3001}:3001"
+    volumes:
+      - ./trader-charts-frontend:/app
+      - /app/node_modules
+    environment:
+      - REACT_APP_API_URL=http://localhost:3000
+    restart: unless-stopped
+    command: ["npm", "run", "start-mock"]
+    depends_on:
+      - frontend-mock-api

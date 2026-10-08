@@ -1,0 +1,54 @@
+version: "3.8"
+services:
+  backend-prod:
+    build:
+      context: ./trader-charts-backend
+      target: production
+    container_name: trader-charts-backend-prod
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./trader-charts-backend/.env.staging
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+
+  frontend-prod:
+    build:
+      context: ./trader-charts-frontend
+      target: production
+    container_name: trader-charts-frontend-prod
+    ports:
+      - "3001:80" # Nginx serves on 80 internally
+    env_file:
+      - ./trader-charts-frontend/.env.staging
+    restart: unless-stopped
+    depends_on:
+      backend-prod:
+        condition: service_healthy
+
+  kairos-ai-prod:
+    build:
+      context: ./../chat-ui
+      target: final
+    container_name: kairos-ai
+    ports:
+      - "5173:3000" # Maps the container port to the host. Makes it visible externally and directly accessible via the web
+    env_file:
+      - ./../chat-ui/.env
+      - ./../chat-ui/.env.local
+    environment:
+      MONGODB_URL: mongodb://host.docker.internal:27017
+    restart: unless-stopped
+
+compute-services-prod:
+  build:
+    context: ./trader-charts-compute-services
+    target: production
+  container_name: collector-prod
+  restart: "no" # Job runs once and stops
+  env_file:
+    - ./trader-charts-compute-services/.env.staging

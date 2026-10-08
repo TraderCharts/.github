@@ -1,0 +1,21 @@
+# k8s/jobs/analyze-sentiment-cronjob.yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: analyze-sentiment
+spec:
+  schedule: "30 0 */7 * *" # 30 mins después de RSS (0:30 AM cada 7 días)
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: compute-services
+              image: trader-charts-compute-services
+              imagePullPolicy: Never
+              command:
+                ["python", "-m", "mains.main_analyze_sentiment_model_rss_feeds"]
+              envFrom:
+                - configMapRef:
+                    name: compute-services-config
+          restartPolicy: Never
